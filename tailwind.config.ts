@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: ['class'],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -19,6 +20,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        accent: '#8ef805',
+      },
+      dropShadow: {
+        sm: '0px 0.1px 0.1px #001E00',
+        accent: '0px 0.8px 0.5px #8ef805',
       },
     },
   },
