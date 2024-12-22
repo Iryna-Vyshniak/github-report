@@ -107,9 +107,9 @@ body {
       background: transparent;
 
       &:hover:after {
-        border-top: none !important;
-        border-bottom: none !important;
-        border-left: none !important;
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
       }
 
       &:after {
