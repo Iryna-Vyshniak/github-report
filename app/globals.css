@@ -26,12 +26,34 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: url('https://images.unsplash.com/photo-1558051815-0f18e64e6280?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
+  background-size: cover;
+  min-height: 100vh;
   height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer base {
+  /* Remove scrollbar */
+  .remove-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    border-radius: 0px;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 0px;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+
   .container {
     padding: 1em;
     background-color: var(--containerBg);
@@ -44,6 +66,8 @@ body {
   }
 
   .screen {
+    margin: 0 auto 1rem auto;
+    padding: 0.25rem;
     background-image: linear-gradient(180deg, rgb(200, 214, 183), #8d9781);
     border-top: 0.25rem solid #abafba;
     border-right: 0.25rem solid #abafba;
@@ -52,8 +76,6 @@ body {
     border-radius: 0.25rem;
     box-shadow: 0 0.25rem 0.25rem #0007 inset;
     font: 2em/1 'VT323', monospace;
-    margin: 0 auto 1rem auto;
-    padding: 0.25rem;
     text-shadow: 0.1rem 0.1rem 0.1rem #0004;
   }
 
@@ -141,6 +163,12 @@ body {
       border-bottom: 0.25rem solid #454954;
       border-left: 0.25rem solid #454954;
     }
+    .printer {
+      border-top: 0.25rem solid #1c1e22;
+      border-right: 0.25rem solid #1c1e22;
+      border-bottom: 0.25rem solid #25282f;
+      border-left: 0.25rem solid #25282f;
+    }
 
     .key {
       border-style: solid;
@@ -160,5 +188,162 @@ body {
       background: -webkit-linear-gradient(top, rgba(80, 80, 80, 1) 0%, rgba(30, 30, 30, 1));
       transform: translateY(0.5px);
     }
+  }
+}
+
+.printer {
+  border-top: 0.25rem solid #abafba;
+  border-right: 0.25rem solid #abafba;
+  border-bottom: 0.25rem solid #d0cece;
+  border-left: 0.25rem solid #c7cad1;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.25rem 0.25rem #0007 inset;
+}
+.container-report {
+  padding: 50px 0;
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  z-index: 101;
+  overflow: hidden;
+}
+.report {
+  width: 18.75rem;
+  padding: 0.625rem 1.25rem;
+  background: #fff
+    url(https://static.licdn.com/scds/common/u/images/apps/payments/textures/texture_paper_304x128_v1.png);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  z-index: 101;
+}
+
+.report-print {
+  -webkit-animation: slideDown 3s 1.6s ease both;
+  animation: slideDown 3s 1.6s ease both;
+  z-index: 101;
+}
+
+.report-exit {
+  -webkit-animation: slideUp 1.6s ease both;
+  animation: slideUp 1.6s ease both;
+  z-index: 101;
+}
+
+@-webkit-keyframes slideDown {
+  0% {
+    transform: translateY(-110%);
+  }
+
+  20% {
+    transform: translateY(-90%);
+  }
+
+  30% {
+    transform: translateY(-80%);
+  }
+
+  40% {
+    transform: translateY(-70%);
+  }
+
+  60% {
+    transform: translateY(-60%);
+  }
+
+  70% {
+    transform: translateY(-40%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(-110%);
+  }
+
+  20% {
+    transform: translateY(-90%);
+  }
+
+  30% {
+    transform: translateY(-80%);
+  }
+
+  40% {
+    transform: translateY(-70%);
+  }
+
+  60% {
+    transform: translateY(-60%);
+  }
+
+  70% {
+    transform: translateY(-40%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    transform: translateY(0%);
+  }
+
+  20% {
+    transform: translateY(-40%);
+  }
+
+  30% {
+    transform: translateY(-60%);
+  }
+
+  40% {
+    transform: translateY(-70%);
+  }
+
+  60% {
+    transform: translateY(-80%);
+  }
+
+  70% {
+    transform: translateY(-90%);
+  }
+
+  100% {
+    transform: translateY(-110%);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(0%);
+  }
+
+  20% {
+    transform: translateY(-40%);
+  }
+
+  30% {
+    transform: translateY(-60%);
+  }
+
+  40% {
+    transform: translateY(-70%);
+  }
+
+  60% {
+    transform: translateY(-80%);
+  }
+
+  70% {
+    transform: translateY(-90%);
+  }
+
+  100% {
+    transform: translateY(-110%);
   }
 }

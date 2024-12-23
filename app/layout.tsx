@@ -32,7 +32,10 @@ export default function RootLayout({
           content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative remove-scrollbar`}
+      >
+        <div className='absolute top-0 left-0 w-[200vw] h-[50vw] bg-[#efbb8130] blur-50 shadow-[0_0_0_30px_rgba(234,121,0,0.6),0_0_0_4000px_rgba(0,0,0,0.4)] dark:shadow-[0_0_0_30px_rgba(234,121,0,0.7),0_0_0_4000px_rgba(0,0,0,0.6)] rotate-45 -translate-x-[50vw] translate-y-[15vw]'></div>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
