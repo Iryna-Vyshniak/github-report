@@ -11,9 +11,10 @@ const SOUND = '/sounds/press-key.mp3';
 interface KeyboardProps {
   text: string;
   onInput: (newText: string) => void;
+  onPrint: () => void;
 }
 
-const Keyboard: React.FC<KeyboardProps> = ({ text, onInput }) => {
+const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
   const [capslock, setCapslock] = useState<boolean>(false);
   const [numlock, setNumlock] = useState<boolean>(false);
   const [soundlock, setSoundlock] = useState<boolean>(false);
@@ -93,6 +94,10 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput }) => {
 
     if (key.classes.includes('capslock')) {
       setCapslock(!capslock);
+      return;
+    }
+    if (key.classes.includes('print')) {
+      onPrint();
       return;
     }
 
@@ -182,7 +187,9 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput }) => {
               className={`key h-[1.5rem] sm:h-[2.5rem] rounded-md flex items-center justify-center cursor-pointer text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs ${getDynamicWidth(
                 key
               )} ${key.classes.includes('print') ? 'drop-shadow-accent' : ''}`}
-              onClick={() => handleKeyClick(key)}
+              onClick={() => {
+                handleKeyClick(key);
+              }}
             >
               <kbd>{getDisplayValue(key)}</kbd>
             </li>
