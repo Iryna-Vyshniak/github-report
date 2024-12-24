@@ -68,9 +68,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
 
     // If it's a letter, we consider capslock and numlock
     if (key.classes.includes('letter')) {
-      if (capslock || numlock) {
-        character = character.toUpperCase();
-      }
+      character = capslock ? character.toUpperCase() : character;
     }
 
     // Special keys
@@ -106,7 +104,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
 
   const getDisplayValue = (key: Key): string => {
     if (key.classes.includes('letter')) {
-      return capslock || numlock ? key.off!.toUpperCase() : key.off!;
+      return capslock ? key.off!.toUpperCase() : key.off!;
     }
     if (key.classes.includes('symbol') && numlock) {
       return key.on || key.off || '';
@@ -187,11 +185,18 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
               className={`key h-[1.5rem] sm:h-[2.5rem] rounded-md flex items-center justify-center cursor-pointer text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs ${getDynamicWidth(
                 key
               )} ${key.classes.includes('print') ? 'drop-shadow-accent' : ''}`}
-              onClick={() => {
-                handleKeyClick(key);
-              }}
             >
-              <kbd>{getDisplayValue(key)}</kbd>
+              <button
+                className='w-full h-full border-none'
+                disabled={key.classes.includes('print') && !text}
+                type={key.classes.includes('print') ? 'submit' : 'button'}
+                onClick={() => {
+                  handleKeyClick(key);
+                }}
+              >
+                {' '}
+                <kbd>{getDisplayValue(key)}</kbd>
+              </button>
             </li>
           ))}
         </ul>
