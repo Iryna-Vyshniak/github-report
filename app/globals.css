@@ -207,13 +207,10 @@ body {
   overflow: hidden;
 }
 .report {
-  width: 18.75rem;
   padding: 0.625rem 1.25rem;
   background: #fff
     url(https://static.licdn.com/scds/common/u/images/apps/payments/textures/texture_paper_304x128_v1.png);
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-  -webkit-transform-origin: 50% 0;
-  transform-origin: 50% 0;
   z-index: 101;
 }
 
