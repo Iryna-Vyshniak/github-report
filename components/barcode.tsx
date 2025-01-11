@@ -12,7 +12,18 @@ const Barcode = ({ value }: BarcodeProps) => {
 
   useEffect(() => {
     if (barcodeRef.current) {
-      JsBarcode(barcodeRef.current, value, { format: 'code39', width: 1, height: 45 });
+      try {
+        if (value) {
+          // Generate barcode if value is valid
+          JsBarcode(barcodeRef.current, value, { format: 'CODE39', width: 1, height: 45 });
+        } else {
+          // If the value is empty, clear the barcode
+          barcodeRef.current.innerHTML = '';
+          console.warn('Empty value provided to Barcode component.');
+        }
+      } catch (error) {
+        console.error('Error generating barcode:', error);
+      }
     }
   }, [value]);
   return <svg ref={barcodeRef} className='w-full'></svg>;
