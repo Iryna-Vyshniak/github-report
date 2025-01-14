@@ -188,7 +188,6 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
             >
               <button
                 className='w-full h-full border-none'
-                disabled={key.classes.includes('print') && !text}
                 type={key.classes.includes('print') ? 'submit' : 'button'}
                 onClick={() => {
                   handleKeyClick(key);
