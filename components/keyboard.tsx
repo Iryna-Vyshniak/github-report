@@ -6,15 +6,18 @@ import { PiSunLight, PiMoon } from 'react-icons/pi';
 import { LuVolume2, LuVolumeX } from 'react-icons/lu';
 
 import { keys, Key } from '@/shared/data/data';
+import ShareButton from './share-button';
 const SOUND = '/sounds/press-key.mp3';
 
 interface KeyboardProps {
   text: string;
   onInput: (newText: string) => void;
   onPrint: () => void;
+  isPrint: boolean;
+  reportRef: React.RefObject<HTMLDivElement>;
 }
 
-const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
+const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint, isPrint, reportRef }) => {
   const [capslock, setCapslock] = useState<boolean>(false);
   const [numlock, setNumlock] = useState<boolean>(false);
   const [soundlock, setSoundlock] = useState<boolean>(false);
@@ -43,6 +46,8 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
   const turnSoundOff = () => {
     setSoundlock(false);
   };
+
+  const printButtonClass = isPrint ? 'bg-slate-20 opacity-50' : 'hover:scale-110';
 
   const getDynamicWidth = (key: Key): string => {
     if (key.classes.includes('delete')) return 'w-[5rem]';
@@ -132,7 +137,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
           <li>
             {' '}
             <button
-              className='key w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
+              className='key p-[2px] w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
               onClick={turnSoundOn}
             >
               <span
@@ -149,7 +154,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
           <li>
             {' '}
             <button
-              className='key w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
+              className='key p-[2px] w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
               onClick={turnSoundOff}
             >
               <span
@@ -166,7 +171,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
           <li>
             {' '}
             <button
-              className='key w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
+              className='key p-[2px] w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
               <span className='dark:text-white text-slate-800 text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs'>
@@ -175,6 +180,9 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
             </button>
           </li>
         </ul>
+        <nav aria-label='Report actions'>
+          <ShareButton reportRef={reportRef} username={text} isPrint={isPrint} />
+        </nav>
       </div>
 
       {keys.map((row, rowIndex) => (
@@ -187,13 +195,18 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint }) => {
               )} ${key.classes.includes('print') ? 'drop-shadow-accent' : ''}`}
             >
               <button
-                className='w-full h-full border-none'
+                className={`w-full h-full border-none ${
+                  key.classes.includes('print') ? printButtonClass : ''
+                }`}
                 type={key.classes.includes('print') ? 'submit' : 'button'}
                 onClick={() => {
-                  handleKeyClick(key);
+                  if (key.classes.includes('print')) {
+                    onPrint();
+                  } else {
+                    handleKeyClick(key);
+                  }
                 }}
               >
-                {' '}
                 <kbd>{getDisplayValue(key)}</kbd>
               </button>
             </li>
