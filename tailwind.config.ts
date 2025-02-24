@@ -17,6 +17,9 @@ export default {
       '2xl': '1536px'
     },
     extend: {
+      fontFamily: {
+        courier: ["Courier", "Courier New", "monospace"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
