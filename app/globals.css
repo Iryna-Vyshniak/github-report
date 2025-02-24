@@ -24,6 +24,12 @@
   scroll-behavior: smooth;
 }
 
+hr {
+  border-bottom: 1.5px dashed var(--foreground);
+  margin: 0.625rem 0;
+  width: 100%;
+}
+
 body {
   color: var(--foreground);
   background: url('https://images.unsplash.com/photo-1558051815-0f18e64e6280?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
@@ -203,8 +209,8 @@ body {
   padding: 50px 0;
   -webkit-transform-origin: 50% 0;
   transform-origin: 50% 0;
-  z-index: 101;
   overflow: hidden;
+  overflow-y: scroll;
 }
 .report {
   padding: 0.625rem 1.25rem;
