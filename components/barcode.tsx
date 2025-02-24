@@ -15,7 +15,12 @@ const Barcode = ({ value }: BarcodeProps) => {
       try {
         if (value) {
           // Generate barcode if value is valid
-          JsBarcode(barcodeRef.current, value, { format: 'CODE39', width: 1, height: 45 });
+          JsBarcode(barcodeRef.current, value, {
+            format: 'CODE39',
+            width: 1,
+            height: 45,
+            displayValue: false,
+          });
         } else {
           // If the value is empty, clear the barcode
           barcodeRef.current.innerHTML = '';
