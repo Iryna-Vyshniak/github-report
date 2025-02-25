@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { PiSunLight, PiMoon } from 'react-icons/pi';
 import { LuVolume2, LuVolumeX } from 'react-icons/lu';
@@ -21,9 +21,15 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint, isPrint, re
   const [capslock, setCapslock] = useState<boolean>(false);
   const [numlock, setNumlock] = useState<boolean>(false);
   const [soundlock, setSoundlock] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Initialize the audio
   const initializeAudio = () => {
@@ -140,7 +146,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint, isPrint, re
               className='key p-[2px] w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
               onClick={turnSoundOn}
             >
-              <span
+              <div
                 className={`text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs ${
                   soundlock
                     ? 'text-accent dark:text-accent drop-shadow-sm'
@@ -148,7 +154,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint, isPrint, re
                 }`}
               >
                 <LuVolume2 />
-              </span>
+              </div>
             </button>
           </li>
           <li>
@@ -157,7 +163,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint, isPrint, re
               className='key p-[2px] w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
               onClick={turnSoundOff}
             >
-              <span
+              <div
                 className={`text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs ${
                   !soundlock
                     ? 'text-accent dark:text-accent drop-shadow-sm'
@@ -165,18 +171,16 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint, isPrint, re
                 }`}
               >
                 <LuVolumeX />
-              </span>
+              </div>
             </button>
           </li>
           <li>
             {' '}
             <button
-              className='key p-[2px] w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer'
+              className='key p-[2px] w-[1.5rem] sm:w-[2.5rem] rounded-md flex items-center justify-center cursor-pointer dark:text-white text-slate-800 text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs'
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
-              <span className='dark:text-white text-slate-800 text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs'>
-                {theme === 'dark' ? <PiSunLight /> : <PiMoon />}
-              </span>
+              {mounted ? theme === 'dark' ? <PiSunLight /> : <PiMoon /> : <PiSunLight />}
             </button>
           </li>
         </ul>
@@ -187,30 +191,32 @@ const Keyboard: React.FC<KeyboardProps> = ({ text, onInput, onPrint, isPrint, re
 
       {keys.map((row, rowIndex) => (
         <ul key={rowIndex} className='flex gap-1 items-center justify-between'>
-          {row.map((key, keyIndex) => (
-            <li
-              key={keyIndex}
-              className={`key h-[1.5rem] sm:h-[2.5rem] rounded-md flex items-center justify-center cursor-pointer text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs ${getDynamicWidth(
-                key
-              )} ${key.classes.includes('print') ? 'drop-shadow-accent' : ''}`}
-            >
-              <button
-                className={`w-full h-full border-none ${
-                  key.classes.includes('print') ? printButtonClass : ''
-                }`}
-                type={key.classes.includes('print') ? 'submit' : 'button'}
-                onClick={() => {
-                  if (key.classes.includes('print')) {
-                    onPrint();
-                  } else {
-                    handleKeyClick(key);
-                  }
-                }}
-              >
-                <kbd>{getDisplayValue(key)}</kbd>
-              </button>
-            </li>
-          ))}
+          {row.length > 0
+            ? row.map((key, keyIndex) => (
+                <li
+                  key={keyIndex}
+                  className={`key h-[1.5rem] sm:h-[2.5rem] rounded-md flex items-center justify-center cursor-pointer text-[.5rem] s:text-[.6rem] sm:text-[.7rem] md:text-xs ${getDynamicWidth(
+                    key
+                  )} ${key.classes.includes('print') ? 'drop-shadow-accent' : ''}`}
+                >
+                  <button
+                    className={`w-full h-full border-none ${
+                      key.classes.includes('print') ? printButtonClass : ''
+                    }`}
+                    type={key.classes.includes('print') ? 'submit' : 'button'}
+                    onClick={() => {
+                      if (key.classes.includes('print')) {
+                        onPrint();
+                      } else {
+                        handleKeyClick(key);
+                      }
+                    }}
+                  >
+                    <kbd>{getDisplayValue(key)}</kbd>
+                  </button>
+                </li>
+              ))
+            : null}
         </ul>
       ))}
     </div>

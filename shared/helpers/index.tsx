@@ -12,7 +12,8 @@ export const formatDate = (date: Date, locale: string = 'en-US'): string => {
 };
 
 export const generateOrderNumber = (): string => {
-  return String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+  const orderNumber = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+  return orderNumber;
 };
 
 export const handleError = (message: string): null => {

@@ -13,7 +13,7 @@ export default function GitHubError() {
   }, [step]);
 
   return (
-    <pre className='text-red-800 text-center text-sm font-mono animate-pulse leading-tight'>
+    <pre className='text-red-800 text-center text-xs font-mono animate-pulse leading-tight'>
       {`
   ██████████████████████
   █  ⚠️  SYSTEM ERROR  ⚠️  █

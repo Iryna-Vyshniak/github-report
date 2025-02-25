@@ -13,7 +13,7 @@ export default function GitHubLoader() {
   }, [step]);
 
   return (
-    <pre className='text-slate-500 text-center text-sm font-mono animate-pulse leading-tight'>
+    <pre className='text-slate-500 text-center text-xs font-mono animate-pulse leading-tight'>
       {`
   ████████████████████
   █                  █
