@@ -159,8 +159,8 @@ const Report = ({ user, stats, isVisible, onAnimationEnd, reportRef }: ReportPro
               Bank of Open Source
             </h3>
 
-            <div className="relative inline-flex w-full text-center  before:content-[' '] before:inline-block before:w-[5%] before:border-t before:border-dashed before:border-gray-400 before:mb-1 after:content-[' '] after:inline-block after:w-[5%] after:border-t after:border-dashed after:border-gray-400 after:mb-1">
-              <span className='font-bold uppercase tracking-wide text-gray-700 px-2'>
+            <div className="relative inline-flex w-full items-center justify-center  before:content-[' '] before:inline-block before:w-[5%] before:border-b before:border-dashed before:border-gray-400 before:mb-1 after:content-[' '] after:inline-block after:w-[5%] after:border-b after:border-dashed after:border-gray-400 after:mb-1">
+              <span className='font-bold uppercase tracking-wide text-gray-700 px-2 text-center'>
                 Bank of Open Source
               </span>
             </div>
@@ -177,8 +177,8 @@ const Report = ({ user, stats, isVisible, onAnimationEnd, reportRef }: ReportPro
               Auth Code: <span className='inline-block align-middle'>****</span>{' '}
             </p>
 
-            <div className="relative inline-flex w-full text-center  before:content-[' '] before:inline-block before:w-[5%] before:border-t before:border-dashed before:border-gray-400 before:mb-1 after:content-[' '] after:inline-block after:w-[5%] after:border-t after:border-dashed after:border-gray-400 after:mb-1">
-              <span className='font-bold uppercase tracking-wide text-red-800 px-2'>
+            <div className="relative inline-flex w-full items-center justify-center  before:content-[' '] before:inline-block before:w-[5%] before:border-b before:border-dashed before:border-gray-400 before:mb-1 after:content-[' '] after:inline-block after:w-[5%] after:border-b after:border-dashed after:border-gray-400 after:mb-1">
+              <span className='font-bold uppercase tracking-wide text-red-800 px-2 text-center'>
                 Transaction Approved ✔
               </span>
             </div>
